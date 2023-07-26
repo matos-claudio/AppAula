@@ -9,14 +9,17 @@ import {
   Alert,
   ScrollView,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 const Login = () => {
+  const {navigate} = useNavigation();
+
   // criando nossos states
   const [user, setUser] = useState<String>('');
   const [password, setPassword] = useState<String>('');
 
   const login = () => {
-    Alert.alert('Atenção', 'Cliquei em login');
+    navigate('Home');
   };
 
   const forgetMyPassword = () => {
