@@ -1,3 +1,4 @@
+import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {
   ActivityIndicator,
@@ -34,7 +35,7 @@ interface IData {
 const Home = () => {
   const [user, setUser] = useState<IUser>();
   const [listRpos, setListRepos] = useState<IData[]>([]);
-  //   const [isLoading, setIsLoading] = useState<Boolean>(true);
+  const {navigate} = useNavigation();
 
   const URL = 'https://api.github.com';
   useEffect(() => {
@@ -42,7 +43,7 @@ const Home = () => {
     fetch(`${URL}/user`, {
       method: 'GET',
       headers: {
-        Authorization: 'Bearer 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',
+        Authorization: 'Bearer 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',
       },
     })
       .then(response => response.json())
@@ -62,7 +63,7 @@ const Home = () => {
     fetch(`${URL}/users/matos-claudio/repos`, {
       method: 'GET',
       headers: {
-        Authorization: 'Bearer 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',
+        Authorization: 'Bearer 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',
       },
     })
       .then(response => response.json())
@@ -71,6 +72,24 @@ const Home = () => {
         setListRepos(json);
       });
   }, []);
+
+  useEffect(() => {
+    fetch(`${URL}/users/rpc1910`, {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer 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',
+      },
+    })
+      .then(response => response.json())
+      .then(json => {
+        console.log(`REPOSITORIOS-USUARIOS: ${JSON.stringify(json)}`);
+        // setListRepos(json);
+      });
+  }, []);
+
+  const onPress = ({owner}: IData) => {
+    navigate('Details', {owner});
+  };
 
   return (
     <SafeAreaView style={{flex: 1, marginTop: StatusBar.currentHeight || 0}}>
@@ -85,7 +104,7 @@ const Home = () => {
       <FlatList
         data={listRpos}
         renderItem={({item, index}) => (
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => onPress(item)}>
             <View
               key={index}
               style={{backgroundColor: '#FFF', marginTop: 8, padding: 8}}>

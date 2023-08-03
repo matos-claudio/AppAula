@@ -3,11 +3,15 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Login from '../screens/login';
 import Home from '../screens/home';
+import Details from '../screens/details';
 
 // Objeto com as telas do Stack
 type RootStackParamList = {
   Login: undefined;
   Home: undefined;
+  Details: {
+    owner: {};
+  };
 };
 
 const Stack = createNativeStackNavigator();
@@ -34,7 +38,14 @@ const Routes = () => {
           name="Home"
           component={Home}
           options={{
-            title: 'Listagem de projetos',
+            title: '',
+          }}
+        />
+        <Stack.Screen
+          name="Details"
+          component={Details}
+          options={{
+            title: '',
           }}
         />
       </Stack.Navigator>
