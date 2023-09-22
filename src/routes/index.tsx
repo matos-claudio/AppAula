@@ -4,6 +4,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Login from '../screens/login';
 import Home from '../screens/home';
 import Details from '../screens/details';
+import Teste from '../screens/teste';
 
 // Objeto com as telas do Stack
 type RootStackParamList = {
@@ -12,6 +13,7 @@ type RootStackParamList = {
   Details: {
     owner: {};
   };
+  Teste: undefined;
 };
 
 const Stack = createNativeStackNavigator();
@@ -26,7 +28,7 @@ declare global {
 const Routes = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator initialRouteName="Teste">
         <Stack.Screen
           name="Login"
           component={Login}
@@ -44,6 +46,13 @@ const Routes = () => {
         <Stack.Screen
           name="Details"
           component={Details}
+          options={{
+            title: '',
+          }}
+        />
+        <Stack.Screen
+          name="Teste"
+          component={Teste}
           options={{
             title: '',
           }}
